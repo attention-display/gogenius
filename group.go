@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/attention-display/gogenius/utils"
+	"mvdan.cc/gofumpt/format"
 )
 
 func NewGroup() *Group {
@@ -98,7 +99,8 @@ func (g *Group) String() string {
 	defer buf.Free()
 
 	g.render(buf)
-	return buf.String()
+	res, _ := format.Source([]byte(buf.String()), format.Options{})
+	return string(res)
 }
 
 func (g *Group) AddLineComment(content string, args ...interface{}) *Group {
