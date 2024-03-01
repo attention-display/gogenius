@@ -1,9 +1,13 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type ivar struct {
-	items *group
+	items *Group
 }
 
 func Var() *ivar {
@@ -19,7 +23,7 @@ func Var() *ivar {
 }
 
 func (i *ivar) render(w io.Writer) {
-	writeString(w, "var ")
+	utils.WriteString(w, "var ")
 	i.items.render(w)
 }
 

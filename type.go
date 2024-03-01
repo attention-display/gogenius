@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type itype struct {
 	name string
@@ -24,6 +28,6 @@ func TypeAlias(name string, typ interface{}) *itype {
 }
 
 func (i *itype) render(w io.Writer) {
-	writeStringF(w, "type %s %s", i.name, i.sep)
+	utils.WriteStringF(w, "type %s %s", i.name, i.sep)
 	i.item.render(w)
 }

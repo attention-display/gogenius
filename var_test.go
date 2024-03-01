@@ -1,7 +1,9 @@
-package gg
+package gogenius
 
 import (
 	"testing"
+
+	"github.com/attention-display/gogenius/utils"
 )
 
 func TestVar(t *testing.T) {
@@ -15,7 +17,7 @@ func TestVar(t *testing.T) {
 			AddField("Version", Lit(2)).
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("typed", func(t *testing.T) {
@@ -28,7 +30,7 @@ func TestVar(t *testing.T) {
 			AddTypedField("Version", "int", Lit(2)).
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("multiple", func(t *testing.T) {
@@ -46,7 +48,7 @@ Description="Hello, World!"
 			AddField("Description", Lit("Hello, World!")).
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("decl", func(t *testing.T) {
@@ -59,6 +61,6 @@ Description="Hello, World!"
 			AddDecl("_", "io.Reader").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 }

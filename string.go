@@ -1,11 +1,13 @@
-package gg
+package gogenius
 
 import (
 	"fmt"
-	"github.com/Xuanwo/go-bufferpool"
 	"io"
 	"strings"
 	"text/template"
+
+	"github.com/Xuanwo/go-bufferpool"
+	"github.com/attention-display/gogenius/utils"
 )
 
 var pool = bufferpool.New(1024)
@@ -17,7 +19,7 @@ const lineLength = 80
 type istring string
 
 func (v *istring) render(w io.Writer) {
-	writeString(w, string(*v))
+	utils.WriteString(w, string(*v))
 }
 
 // S is an alias to String.
@@ -111,7 +113,7 @@ func (v *lit) render(w io.Writer) {
 		panic(fmt.Sprintf("unsupported type for literal: %T", v.value))
 	}
 
-	writeString(w, out)
+	utils.WriteString(w, out)
 }
 
 func (v *lit) String() string {

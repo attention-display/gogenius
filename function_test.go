@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 func TestFunction(t *testing.T) {
 	t.Run("no receiver", func(t *testing.T) {
@@ -15,7 +19,7 @@ func TestFunction(t *testing.T) {
 			AddResult("d", "uint").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 	t.Run("has receiver", func(t *testing.T) {
 		buf := pool.Get()
@@ -34,7 +38,7 @@ return "Hello, World!"
 			).
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("node input", func(t *testing.T) {
@@ -54,7 +58,7 @@ return "Hello, World!"
 			).
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("call", func(t *testing.T) {
@@ -67,7 +71,7 @@ return "Hello, World!"
 		fn.WithCall()
 		fn.render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("no name result - no receiver - single result", func(t *testing.T) {
@@ -81,7 +85,7 @@ return "Hello, World!"
 			AddResult("", "int").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("no name result - no receiver - multi result", func(t *testing.T) {
@@ -97,7 +101,7 @@ return "Hello, World!"
 			AddResult("", "error").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("no name result - has receiver - single result", func(t *testing.T) {
@@ -112,7 +116,7 @@ return "Hello, World!"
 			AddResult("", "int").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("no name result - has receiver - multi result", func(t *testing.T) {
@@ -129,6 +133,6 @@ return "Hello, World!"
 			AddResult("", "error").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 }

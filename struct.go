@@ -1,10 +1,14 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type istruct struct {
 	name  string
-	items *group
+	items *Group
 }
 
 // Struct will insert a new struct.
@@ -18,7 +22,7 @@ func Struct(name string) *istruct {
 }
 
 func (i *istruct) render(w io.Writer) {
-	writeStringF(w, "type %s struct", i.name)
+	utils.WriteStringF(w, "type %s struct", i.name)
 	i.items.render(w)
 }
 

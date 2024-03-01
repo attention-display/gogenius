@@ -1,14 +1,16 @@
-package gg
+package gogenius
 
 import (
 	"io"
+
+	"github.com/attention-display/gogenius/utils"
 )
 
 type icall struct {
 	owner Node
 	name  string
-	items *group
-	calls *group
+	items *Group
+	calls *Group
 }
 
 // Call is used to generate a function call.
@@ -24,12 +26,12 @@ func Call(name string) *icall {
 func (i *icall) render(w io.Writer) {
 	if i.owner != nil {
 		i.owner.render(w)
-		writeString(w, ".")
+		utils.WriteString(w, ".")
 	}
-	writeString(w, i.name)
+	utils.WriteString(w, i.name)
 	i.items.render(w)
 	if i.calls.length() != 0 {
-		writeString(w, ".")
+		utils.WriteString(w, ".")
 		i.calls.render(w)
 	}
 }

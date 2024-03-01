@@ -1,7 +1,9 @@
-package gg
+package gogenius
 
 import (
 	"testing"
+
+	"github.com/attention-display/gogenius/utils"
 )
 
 func TestPackage(t *testing.T) {
@@ -12,5 +14,5 @@ func TestPackage(t *testing.T) {
 
 	Package("test").render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }

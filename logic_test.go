@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 func TestIf(t *testing.T) {
 	buf := pool.Get()
@@ -15,7 +19,7 @@ if ok {
 	If(String("ok")).AddBody(String(`println("Hello, World!")`)).
 		render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }
 
 func TestSwitch(t *testing.T) {
@@ -38,5 +42,5 @@ default:
 	is.NewDefault().AddBody(String(`print("default")`))
 	is.render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }

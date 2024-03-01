@@ -1,12 +1,16 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type isignature struct {
-	comments   *group
+	comments   *Group
 	name       string
-	parameters *group
-	results    *group
+	parameters *Group
+	results    *Group
 }
 
 func signature(name string) *isignature {
@@ -31,7 +35,7 @@ func signature(name string) *isignature {
 
 func (i *isignature) render(w io.Writer) {
 	// Render function name
-	writeString(w, i.name)
+	utils.WriteString(w, i.name)
 
 	// Render parameters
 	i.parameters.render(w)
@@ -51,7 +55,7 @@ func (i *isignature) AddResult(name, typ interface{}) *isignature {
 
 type iinterface struct {
 	name  string
-	items *group
+	items *Group
 }
 
 func Interface(name string) *iinterface {
@@ -62,7 +66,7 @@ func Interface(name string) *iinterface {
 }
 
 func (i *iinterface) render(w io.Writer) {
-	writeStringF(w, "type %s interface", i.name)
+	utils.WriteStringF(w, "type %s interface", i.name)
 	i.items.render(w)
 }
 

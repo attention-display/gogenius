@@ -1,4 +1,4 @@
-package gg
+package gogenius
 
 import (
 	"bytes"
@@ -11,6 +11,8 @@ import (
 	"os"
 	"testing"
 	"text/template"
+
+	"github.com/attention-display/gogenius/utils"
 )
 
 func ExampleNewGroup() {
@@ -181,5 +183,5 @@ type test interface {}
 
 	g.render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }

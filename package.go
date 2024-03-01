@@ -1,13 +1,17 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type ipackage struct {
 	name string
 }
 
 func (i *ipackage) render(w io.Writer) {
-	writeStringF(w, "package %s\n", i.name)
+	utils.WriteStringF(w, "package %s\n", i.name)
 }
 
 func Package(name string) *ipackage {

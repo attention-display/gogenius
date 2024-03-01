@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 func TestReturn(t *testing.T) {
 	buf := pool.Get()
@@ -16,5 +20,5 @@ func TestReturn(t *testing.T) {
 	)
 	ir.render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }

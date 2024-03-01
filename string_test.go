@@ -1,7 +1,9 @@
-package gg
+package gogenius
 
 import (
 	"testing"
+
+	"github.com/attention-display/gogenius/utils"
 )
 
 func TestString(t *testing.T) {
@@ -13,7 +15,7 @@ func TestString(t *testing.T) {
 
 		String(expected).render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 	t.Run("format string", func(t *testing.T) {
 		buf := pool.Get()
@@ -23,7 +25,7 @@ func TestString(t *testing.T) {
 
 		String("Hello, %s!", "World").render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 }
 
@@ -36,7 +38,7 @@ func TestLineComment(t *testing.T) {
 
 		LineComment("Hello, World!").render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 	t.Run("format comment", func(t *testing.T) {
 		buf := pool.Get()
@@ -46,7 +48,7 @@ func TestLineComment(t *testing.T) {
 
 		LineComment("Hello, %s!", "World").render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 }
 
@@ -58,7 +60,7 @@ func TestLit(t *testing.T) {
 
 	Lit(true).render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }
 
 func TestFormatComment(t *testing.T) {
@@ -89,7 +91,7 @@ its own line break.`,
 
 	for _, v := range cases {
 		t.Run(v.name, func(t *testing.T) {
-			compareAST(t, v.expect, formatLineComment(v.input))
+			utils.CompareAST(t, v.expect, formatLineComment(v.input))
 		})
 	}
 }

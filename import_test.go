@@ -1,7 +1,9 @@
-package gg
+package gogenius
 
 import (
 	"testing"
+
+	"github.com/attention-display/gogenius/utils"
 )
 
 func TestImports(t *testing.T) {
@@ -26,5 +28,5 @@ test "testing"
 		AddAlias("testing", "test").
 		render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }

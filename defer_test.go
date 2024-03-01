@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 func TestDefer(t *testing.T) {
 	buf := pool.Get()
@@ -10,5 +14,5 @@ func TestDefer(t *testing.T) {
 
 	Defer("hello()").render(buf)
 
-	compareAST(t, expected, buf.String())
+	utils.CompareAST(t, expected, buf.String())
 }

@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 func TestStruct(t *testing.T) {
 	t.Run("empty", func(t *testing.T) {
@@ -11,7 +15,7 @@ func TestStruct(t *testing.T) {
 
 		Struct("Test").render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("fields", func(t *testing.T) {
@@ -28,6 +32,6 @@ b string
 			AddField("b", "string").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 }

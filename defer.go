@@ -1,13 +1,17 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type idefer struct {
 	body Node
 }
 
 func (i *idefer) render(w io.Writer) {
-	writeString(w, "defer ")
+	utils.WriteString(w, "defer ")
 	i.body.render(w)
 }
 

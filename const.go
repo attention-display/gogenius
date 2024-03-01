@@ -1,9 +1,13 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type iconst struct {
-	items *group
+	items *Group
 }
 
 func Const() *iconst {
@@ -18,7 +22,7 @@ func Const() *iconst {
 	return i
 }
 func (i *iconst) render(w io.Writer) {
-	writeString(w, "const ")
+	utils.WriteString(w, "const ")
 	i.items.render(w)
 }
 

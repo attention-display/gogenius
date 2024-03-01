@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 func TestType(t *testing.T) {
 	t.Run("type def", func(t *testing.T) {
@@ -11,7 +15,7 @@ func TestType(t *testing.T) {
 
 		Type("xstring", "string").render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 	t.Run("type alias", func(t *testing.T) {
 		buf := pool.Get()
@@ -21,6 +25,6 @@ func TestType(t *testing.T) {
 
 		TypeAlias("xstring", "string").render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 }

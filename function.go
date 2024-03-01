@@ -1,30 +1,37 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type ifunction struct {
 	name       string
 	receiver   Node
-	parameters *group
-	results    *group
-	body       *group
+	parameters *Group
+	results    *Group
+	body       *Group
 	call       *icall
 }
 
 // Function represent both method and function in Go.
 //
-// NOTES
+// # NOTES
 //
 // If `WithReceiver`, we will generate a method:
-//    func (t test) Test()
+//
+//	func (t test) Test()
 //
 // If `WithCall`, we will generate a function call:
-//    func Test(){}()
+//
+//	func Test(){}()
 //
 // If `AddBody`, we will generate like a function definition without body:
-//    func Test() {
-//        println("Hello, World!")
-//    }
+//
+//	func Test() {
+//	    println("Hello, World!")
+//	}
 func Function(name string) *ifunction {
 	i := &ifunction{
 		name:       name,
@@ -48,17 +55,17 @@ func Function(name string) *ifunction {
 }
 
 func (i *ifunction) render(w io.Writer) {
-	writeString(w, "func ")
+	utils.WriteString(w, "func ")
 
 	// Render receiver
 	if i.receiver != nil {
-		writeString(w, "(")
+		utils.WriteString(w, "(")
 		i.receiver.render(w)
-		writeString(w, ")")
+		utils.WriteString(w, ")")
 	}
 
 	// Render function name
-	writeString(w, i.name)
+	utils.WriteString(w, i.name)
 
 	// Render parameters
 	i.parameters.render(w)

@@ -1,4 +1,4 @@
-package gg
+package gogenius
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 )
 
 type Generator struct {
-	g *group
+	g *Group
 }
 
 // New will create a new generator which hold the group reference.
@@ -15,7 +15,7 @@ func New() *Generator {
 	return &Generator{g: NewGroup()}
 }
 
-func (g *Generator) NewGroup() (ng *group) {
+func (g *Generator) NewGroup() (ng *Group) {
 	ng = NewGroup()
 	g.g.append(ng)
 	return ng

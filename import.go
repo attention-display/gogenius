@@ -1,9 +1,13 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type iimport struct {
-	items *group
+	items *Group
 }
 
 // Import will start a new import group.
@@ -22,7 +26,7 @@ func (i *iimport) render(w io.Writer) {
 	if i.items.length() == 0 {
 		return
 	}
-	writeString(w, "import ")
+	utils.WriteString(w, "import ")
 	i.items.render(w)
 }
 

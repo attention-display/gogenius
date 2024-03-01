@@ -1,7 +1,9 @@
-package gg
+package gogenius
 
 import (
 	"io"
+
+	"github.com/attention-display/gogenius/utils"
 )
 
 // ifield is used to represent a key-value pair.
@@ -40,9 +42,9 @@ func typedField(name, typ, value interface{}, sep string) *ifield {
 func (f *ifield) render(w io.Writer) {
 	f.name.render(w)
 	if f.typ != nil {
-		writeString(w, " ")
+		utils.WriteString(w, " ")
 		f.typ.render(w)
 	}
-	writeString(w, f.separator)
+	utils.WriteString(w, f.separator)
 	f.value.render(w)
 }

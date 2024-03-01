@@ -1,10 +1,14 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type ivalue struct {
 	typ   string
-	items *group
+	items *Group
 }
 
 func Value(typ string) *ivalue {
@@ -16,7 +20,7 @@ func Value(typ string) *ivalue {
 }
 
 func (v *ivalue) render(w io.Writer) {
-	writeString(w, v.typ)
+	utils.WriteString(w, v.typ)
 	v.items.render(w)
 }
 

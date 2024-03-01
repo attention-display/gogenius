@@ -1,9 +1,13 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type ireturn struct {
-	items *group
+	items *Group
 }
 
 func Return(node ...interface{}) *ireturn {
@@ -15,6 +19,6 @@ func Return(node ...interface{}) *ireturn {
 }
 
 func (i *ireturn) render(w io.Writer) {
-	writeString(w, "return ")
+	utils.WriteString(w, "return ")
 	i.items.render(w)
 }

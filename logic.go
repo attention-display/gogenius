@@ -1,10 +1,14 @@
-package gg
+package gogenius
 
-import "io"
+import (
+	"io"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 type iif struct {
 	judge Node
-	body  *group
+	body  *Group
 }
 
 func If(judge interface{}) *iif {
@@ -14,7 +18,7 @@ func If(judge interface{}) *iif {
 	}
 }
 func (i *iif) render(w io.Writer) {
-	writeString(w, "if ")
+	utils.WriteString(w, "if ")
 	i.judge.render(w)
 	i.body.render(w)
 }
@@ -26,11 +30,11 @@ func (i *iif) AddBody(node ...interface{}) *iif {
 
 type ifor struct {
 	judge Node
-	body  *group
+	body  *Group
 }
 
 func (i *ifor) render(w io.Writer) {
-	writeString(w, "for ")
+	utils.WriteString(w, "for ")
 	i.judge.render(w)
 	i.body.render(w)
 }
@@ -49,16 +53,16 @@ func (i *ifor) AddBody(node ...interface{}) *ifor {
 
 type icase struct {
 	judge Node // judge == nil means it's a default case.
-	body  *group
+	body  *Group
 }
 
 func (i *icase) render(w io.Writer) {
 	if i.judge == nil {
-		writeString(w, "default:")
+		utils.WriteString(w, "default:")
 	} else {
-		writeString(w, "case ")
+		utils.WriteString(w, "case ")
 		i.judge.render(w)
-		writeString(w, ":")
+		utils.WriteString(w, ":")
 	}
 	i.body.render(w)
 }
@@ -75,18 +79,18 @@ type iswitch struct {
 }
 
 func (i *iswitch) render(w io.Writer) {
-	writeString(w, "switch ")
+	utils.WriteString(w, "switch ")
 	i.judge.render(w)
-	writeString(w, "{\n")
+	utils.WriteString(w, "{\n")
 	for _, c := range i.cases {
 		c.render(w)
-		writeString(w, "\n")
+		utils.WriteString(w, "\n")
 	}
 	if i.defaultCase != nil {
 		i.defaultCase.render(w)
-		writeString(w, "\n")
+		utils.WriteString(w, "\n")
 	}
-	writeString(w, "}")
+	utils.WriteString(w, "}")
 }
 
 func Switch(judge interface{}) *iswitch {

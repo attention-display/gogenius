@@ -1,6 +1,10 @@
-package gg
+package gogenius
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/attention-display/gogenius/utils"
+)
 
 func TestCalls(t *testing.T) {
 	t.Run("no owner", func(t *testing.T) {
@@ -10,8 +14,7 @@ func TestCalls(t *testing.T) {
 		expected := "List()"
 
 		Call("List").render(buf)
-
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("witch owner", func(t *testing.T) {
@@ -25,7 +28,7 @@ func TestCalls(t *testing.T) {
 			AddParameter("src").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 
 	t.Run("panic while owner is not nil", func(t *testing.T) {
@@ -43,6 +46,6 @@ func TestCalls(t *testing.T) {
 			AddCall("Next", "src", "dst").
 			render(buf)
 
-		compareAST(t, expected, buf.String())
+		utils.CompareAST(t, expected, buf.String())
 	})
 }

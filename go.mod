@@ -1,4 +1,4 @@
-module github.com/Xuanwo/gg
+module github.com/attention-display/gogenius
 
 go 1.15
 
