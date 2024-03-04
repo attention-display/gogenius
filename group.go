@@ -94,13 +94,16 @@ func (g *Group) AppendFile(path string) error {
 	return nil
 }
 
-func (g *Group) String() string {
+func (g *Group) String() (string, error) {
 	buf := pool.Get()
 	defer buf.Free()
 
 	g.render(buf)
-	res, _ := format.Source([]byte(buf.String()), format.Options{})
-	return string(res)
+	res, err := format.Source([]byte(buf.String()), format.Options{})
+	if err != nil {
+		return "", fmt.Errorf("error message: %s\nformat data: %s", err.Error(), buf.String())
+	}
+	return string(res), nil
 }
 
 func (g *Group) AddLineComment(content string, args ...interface{}) *Group {
